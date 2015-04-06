@@ -1,0 +1,16 @@
+[
+{
+  "modid": "picraft",
+  "name": "Pi Craft",
+  "description": "MineCraft to raspberry pi mode",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["TallPaul"],
+  "credits": "The Forge and FML guys, for making this example",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
