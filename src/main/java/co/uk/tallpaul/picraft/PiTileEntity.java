@@ -63,6 +63,10 @@ public class PiTileEntity extends TileEntity implements IUpdatePlayerListBox{
     	}
     }
     
+    /*
+     * read value from a pi input
+     * 
+     */
     private String getValue(){
     	if (this.pin.equals("-1"))
     	{
@@ -105,6 +109,11 @@ public class PiTileEntity extends TileEntity implements IUpdatePlayerListBox{
         return "0";
     }
     
+    /*
+     * write value to a pi output
+     * 
+     * 
+     */
     private void setValue(String val){
     	
     	String urlParameters  = "";
@@ -151,6 +160,10 @@ public class PiTileEntity extends TileEntity implements IUpdatePlayerListBox{
     	
     }
     
+    /*
+     * get url block associated with this tile entity
+     * 
+     */
     private UrlBlock getBlock(){
     	Block block = worldObj.getBlockState(this.getPos()).getBlock();
     	if (block != null && block.getClass() == UrlBlock.class){
@@ -160,17 +173,6 @@ public class PiTileEntity extends TileEntity implements IUpdatePlayerListBox{
     		return null;
     }
    
-    
-    public void doGpio(){
-    	if (this.type.equals("0")){
-    		//System.out.println("Type is in");
-    		this.getDigitalIo(true);
-    	}
-    	if (this.type.equals("1")){
-    		//System.out.println("Type is out");
-    		//this.setDigitalIo();
-    	} 	
-    }
     
     public void setDigitalIo(boolean val){	
     	if (val == this.lastWrite)
@@ -231,38 +233,11 @@ public class PiTileEntity extends TileEntity implements IUpdatePlayerListBox{
 		return isSwitchedOn;
     	
     }
-   /* 
-    public boolean getIsProvidingPower(){
-    	if (this.getConfig() == false)
-    		return false;
-    	return this.getDigitalIo(false);
-    	//System.out.println("isSwitchedOn is "+this.isSwitchedOn);
-    	//return this.isSwitchedOn;
-    }
-    */
-   /* 
-   private void setDigitalIo(){
-	   UrlBlock block = this.getBlock();
-	   System.out.println("Block for "+this.pos.getX()+" is "+block.getBlockBoundsMaxX());
-	   if (block != null){
-		  if (block.isPowered() == this.lastWrite){
-			  //don't write;
-		  } else {
-		   this.lastWrite = block.isPowered();
-		   if (block.isPowered()){
-			   System.out.println("Block is powered");
-			   this.setValue("1");
-		   }
-		   else{
-			   System.out.println("Block is not powered");
-			   this.setValue("0");
-		   }
-		   //System.out.println("writing "+block.isPowered()+" to "+this.url);
-		  }
-	   }
-   }
-   */
-    
+  
+    /*
+     * Reads configuration for block from a neighbouring sign
+     * 
+     */
     public boolean getConfig(){
     	BlockPos curpos = this.getPos();
     	int xPos = curpos.getX();
@@ -311,10 +286,11 @@ public class PiTileEntity extends TileEntity implements IUpdatePlayerListBox{
     	if(!worldObj.isRemote) { 		 
             tick++;
             if(tick == 10) {
-            	//System.out.println("tick");
             	int i = -1;        	
             	if (this.getConfig()){
-            		this.doGpio();
+            		if (this.type.equals("0")){
+                		this.getDigitalIo(true);
+                	}
             	}
                 tick = 0;
             }

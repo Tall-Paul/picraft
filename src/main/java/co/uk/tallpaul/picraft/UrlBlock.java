@@ -128,22 +128,7 @@ public class UrlBlock extends Block implements ITileEntityProvider {
 		        return ((Integer)state.getValue(POWER)).intValue();
 		    }
 		
-		/*
-		@Override
-		public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
-	    {
-	        if (worldIn.isRemote)
-	        {
-	            return true;
-	        }
-	        else
-	        {
-	        	System.out.println("here2");
-	            TileEntity tileentity = worldIn.getTileEntity(pos);
-	            return tileentity instanceof PiTileEntity ? ((PiTileEntity)tileentity).func_174882_b(playerIn) : false;
-	        }
-	    }
-	    */
+		
 	    
 	    
 	   
